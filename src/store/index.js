@@ -16,7 +16,8 @@ export default new Vuex.Store({
         nachname: person.nachname
       }
       state.liste.push(newPerson);
-      this.state.nextId++;      
+      this.state.nextId++;
+      this.saveToLocalStorage();     
     },
     deletePerson(state, person){
       let index = 0;
@@ -25,15 +26,22 @@ export default new Vuex.Store({
           index = i;
         }
       }
-      state.liste.splice(index, 1);           
+      state.liste.splice(index, 1);
+      this.saveToLocalStorage();           
     }
   },
   actions: {
     saveToLocalStorage(){
-      
+      let dataString = JSON.stringify(this.state.liste);
+      localStorage.setItem('personen', dataString);
     },
     loadFromLocalStorage(){
-
+      if(localStorage.getItem('personen')){
+        const dataString = localStorage.getItem('personen');
+        this.state.liste = JSON.parse(dataString);
+      }else{
+        this.state.liste = [];
+      }
     }
   },
   modules: {
