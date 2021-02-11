@@ -17,7 +17,7 @@ export default new Vuex.Store({
       }
       state.liste.push(newPerson);
       state.nextId++;
-      //store.dispatch('saveToLocalStorage');     
+      //this.$store.dispatch('saveToLocalStorage');     
     },
     deletePerson(state, person){
       let index = 0;
