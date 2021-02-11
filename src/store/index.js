@@ -11,23 +11,23 @@ export default new Vuex.Store({
   mutations: {
     addPerson(state, person){
       const newPerson = {
-        id: this.state.nextId,
+        id: state.nextId,
         vorname: person.vorname,
         nachname: person.nachname
       }
       state.liste.push(newPerson);
-      this.state.nextId++;
-      this.saveToLocalStorage();     
+      state.nextId++;
+      //store.dispatch('saveToLocalStorage');     
     },
     deletePerson(state, person){
       let index = 0;
-      for(let i=0; i<this.state.liste.length; i++){
-        if(person.id === this.state.liste[i].id){
+      for(let i=0; i<state.liste.length; i++){
+        if(person.id === state.liste[i].id){
           index = i;
         }
       }
       state.liste.splice(index, 1);
-      this.saveToLocalStorage();           
+      //store.dispatch('saveToLocalStorage');           
     }
   },
   actions: {
